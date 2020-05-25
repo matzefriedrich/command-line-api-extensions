@@ -8,9 +8,9 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    env:
+      working-directory: ./src
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
