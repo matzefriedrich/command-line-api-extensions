@@ -1,6 +1,6 @@
 # System.CommandLine.Extensions
 
-The new `System.CommandLine` API offers for sure more advanced command configuration and execution than the retired `Microsoft.Extensions.CommandLineUtils` API, but the broader set of functionality comes with the burden of more complex boilerplate code required to let the cow fly. The `System.CommandLine.Extensions` API adds a thin application layer to `System.CommandLine` which is similar to the retired API, cuts down functionality and thus brings back the simplicity.
+The new `System.CommandLine` API offers for sure more advanced command configuration and execution than the retired `Microsoft.Extensions.CommandLineUtils` API. But the broader set of functionality comes with the burden of more complex boilerplate code required to let the cow fly. The `System.CommandLine.Extensions` API adds a thin application layer to `System.CommandLine` which is similar to the retired API, cuts down functionality and thus brings back the simplicity.
 
 ## Greeting Example
 

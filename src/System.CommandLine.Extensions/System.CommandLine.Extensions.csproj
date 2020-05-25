@@ -9,6 +9,7 @@
         <RepositoryUrl>https://github.com/matzefriedrich/command-line-api-extensions</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>CLI</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
