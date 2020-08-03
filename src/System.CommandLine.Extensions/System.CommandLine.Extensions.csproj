@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <PackageVersion>2.0.0-beta1.20255.1</PackageVersion>
+        <PackageVersion>2.0.0-beta1.20371.2</PackageVersion>
         <Authors>Matthias Friedrich</Authors>
         <Description>A slim command configuration and execution layer similar to Microsoft.Extensions.CommandlineUtils.</Description>
         <Copyright>2020 by Matthias Friedrich</Copyright>
@@ -12,8 +12,22 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DocumentationFile>bin\Release\System.CommandLine.Extensions.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+      <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    </PropertyGroup>
+
     <ItemGroup>
-      <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.20253.1" />
+      <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.20371.2" />
     </ItemGroup>
 
 </Project>

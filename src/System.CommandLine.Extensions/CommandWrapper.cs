@@ -30,7 +30,7 @@ namespace System.CommandLine.Extensions
             if (arity != null)
             {
                 option.Argument = new Argument<T> {Arity = arity};
-                option.Required = Nullable.GetUnderlyingType(typeof(T)) == null;
+                option.IsRequired = Nullable.GetUnderlyingType(typeof(T)) == null;
             }
 
             this.command.AddOption(option);
