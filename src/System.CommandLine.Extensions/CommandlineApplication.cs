@@ -30,7 +30,7 @@
             var option = new Option(aliases, description)
             {
                 Argument = new Argument<T>(),
-                Required = Nullable.GetUnderlyingType(typeof(T)) == null
+                IsRequired = Nullable.GetUnderlyingType(typeof(T)) == null
             };
 
             this.rootCommand.AddOption(option);
