@@ -19,11 +19,15 @@
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
       <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+      <WarningsAsErrors></WarningsAsErrors>
+      <NoWarn>1701;1702;1591</NoWarn>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
       <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+      <WarningsAsErrors></WarningsAsErrors>
+      <NoWarn>1701;1702;1591</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
