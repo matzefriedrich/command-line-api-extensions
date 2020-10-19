@@ -32,7 +32,6 @@ namespace System.CommandLine.Extensions
                 IsRequired = Nullable.GetUnderlyingType(typeof(T)) == null
             };
 
-
             this.command.AddOption(option);
             return this;
         }
