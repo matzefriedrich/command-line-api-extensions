@@ -26,12 +26,12 @@ namespace System.CommandLine.Extensions
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(template));
 
             string[] aliases = template.Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries);
-            var option = new Option(aliases, description);
-            if (arity != null)
+            var option = new Option(aliases, description)
             {
-                option.Argument = new Argument<T> {Arity = arity};
-                option.IsRequired = Nullable.GetUnderlyingType(typeof(T)) == null;
-            }
+                Argument = new Argument<T> {Arity = arity},
+                IsRequired = Nullable.GetUnderlyingType(typeof(T)) == null
+            };
+
 
             this.command.AddOption(option);
             return this;
