@@ -5,18 +5,20 @@
     using Parsing;
     using Threading.Tasks;
 
-    public class CommandlineApplication
+    public class CommandLineApplication
     {
         private readonly RootCommand rootCommand = new RootCommand();
 
-        public CommandlineApplication Command(string name, string description, Action<CommandWrapper> factory = null)
+        public CommandLineApplication Command(string name, Action<CommandOption> factory = null) => this.Command(name, null, factory);
+
+        public CommandLineApplication Command(string name, string description = null, Action<CommandOption> factory = null)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
 
             var command = new Command(name, description);
             this.rootCommand.AddCommand(command);
-            var wrapper = new CommandWrapper(command);
+            var wrapper = new CommandOption(command);
             factory?.Invoke(wrapper);
             return this;
         }
@@ -50,7 +52,7 @@
         {
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            var app = new CommandlineApplication();
+            var app = new CommandLineApplication();
             configuration.Configure(app);
 
             var commandLineConfiguration = new CommandLineConfiguration(new[]

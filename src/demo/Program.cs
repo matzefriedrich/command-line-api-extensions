@@ -9,9 +9,10 @@
     {
         private static int Main(string[] args)
         {
-            var app = new CommandlineApplication();
-            app.Command("greeting", "Greets the specified person.", greeting =>
+            var app = new CommandLineApplication();
+            app.Command("greeting", greeting =>
             {
+                greeting.Help("Greets the specified person.");
                 greeting.Option<string>("--name", "The person´s name.", ArgumentArity.ExactlyOne)
                     .Option<bool>("--polite")
                     .OnExecute(async (string name, bool polite) =>
