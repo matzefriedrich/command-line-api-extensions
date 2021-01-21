@@ -7,7 +7,7 @@
 
     internal class Program
     {
-        private static int Main(string[] args)
+        private static async Task<int> Main(string[] args)
         {
             var app = new CommandLineApplication();
             app.Command("greeting", greeting =>
@@ -15,7 +15,7 @@
                 greeting.Help("Greets the specified person.");
                 greeting.Option<string>("--name", "The person´s name.", ArgumentArity.ExactlyOne)
                     .Option<bool>("--polite")
-                    .OnExecute(async (string name, bool polite) =>
+                    .OnExecute(async (string name, bool polite, int missing0) =>
                     {
                         if (polite) Console.WriteLine($"Good day {name}");
                         else Console.WriteLine($"Hello {name}");
@@ -23,7 +23,7 @@
                     });
             });
 
-            return app.Execute(args);
+            return await app.ExecuteAsync(args);
         }
     }
 }
