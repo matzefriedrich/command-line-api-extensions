@@ -5,7 +5,7 @@
     using System.CommandLine.Extensions;
     using System.Threading.Tasks;
 
-    internal class Program
+    internal static class Program
     {
         private static async Task<int> Main(string[] args)
         {
@@ -17,8 +17,7 @@
                     .Option<bool>("--polite")
                     .OnExecute(async (string name, bool polite, int missing0) =>
                     {
-                        if (polite) Console.WriteLine($"Good day {name}");
-                        else Console.WriteLine($"Hello {name}");
+                        Console.WriteLine(polite ? $"Good day {name}" : $"Hello {name}");
                         return await Task.FromResult(0);
                     });
             });
