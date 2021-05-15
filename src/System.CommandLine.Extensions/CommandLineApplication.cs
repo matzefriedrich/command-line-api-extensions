@@ -1,10 +1,13 @@
 ﻿namespace System.CommandLine.Extensions
 {
+    using Diagnostics.CodeAnalysis;
     using Invocation;
     using IO;
     using Parsing;
     using Threading.Tasks;
 
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    [SuppressMessage("ReSharper", "UnusedMethodReturnValue.Global")]
     public class CommandLineApplication
     {
         private readonly Command command;
@@ -20,9 +23,9 @@
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
 
-            var command = new Command(name, description);
-            this.command.AddCommand(command);
-            var wrapper = new CommandLineApplication(command);
+            var subCommand = new Command(name, description);
+            this.command.AddCommand(subCommand);
+            var wrapper = new CommandLineApplication(subCommand);
             factory?.Invoke(wrapper);
             return this;
         }
@@ -58,7 +61,7 @@
         public CommandLineApplication Argument<T>(string name, string description = null)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
-            var argument = new Argument<string>(name) {Description = description};
+            var argument = new Argument<T>(name) {Description = description};
             this.command.Add(argument);
             return this;
         }
