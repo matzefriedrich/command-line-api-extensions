@@ -33,10 +33,10 @@
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(template));
 
             string[] aliases = template.Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries);
-            var option = new Option(aliases, description)
+            Type argumentType = typeof(T);
+            var option = new Option(aliases, description, argumentType, arity: argumentArity)
             {
-                Argument = new Argument<T> {Arity = argumentArity},
-                IsRequired = Nullable.GetUnderlyingType(typeof(T)) == null
+                IsRequired = Nullable.GetUnderlyingType(argumentType) == null
             };
 
             this.command.AddOption(option);
