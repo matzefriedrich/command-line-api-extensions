@@ -2,10 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <PackageVersion>2.0.0-beta1.20574.7</PackageVersion>
+        <PackageVersion>2.0.0-beta1.21216.1</PackageVersion>
         <Authors>Matthias Friedrich</Authors>
         <Description>A slim command configuration and execution layer similar to Microsoft.Extensions.CommandlineUtils.</Description>
-        <Copyright>2020 by Matthias Friedrich</Copyright>
+        <Copyright>2020 - 2021 by Matthias Friedrich</Copyright>
         <RepositoryUrl>https://github.com/matzefriedrich/command-line-api-extensions</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>CLI</PackageTags>
@@ -31,7 +31,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.20574.7" />
+      <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.21216.1" />
     </ItemGroup>
 
 </Project>
