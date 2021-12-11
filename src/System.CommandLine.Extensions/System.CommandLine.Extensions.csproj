@@ -9,7 +9,6 @@
         <RepositoryUrl>https://github.com/matzefriedrich/command-line-api-extensions</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>CLI</PackageTags>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <SignAssembly>False</SignAssembly>
         <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
