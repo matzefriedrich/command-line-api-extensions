@@ -10,6 +10,11 @@
         <RepositoryType>git</RepositoryType>
         <PackageTags>CLI</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <FileVersion>1.0.0.0</FileVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -32,6 +37,13 @@
 
     <ItemGroup>
       <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.21308.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="docs\README.md">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
     </ItemGroup>
 
 </Project>
