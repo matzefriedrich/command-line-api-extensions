@@ -11,7 +11,7 @@
         <PackageTags>CLI</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <SignAssembly>true</SignAssembly>
+        <SignAssembly>False</SignAssembly>
         <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <FileVersion>1.0.0.0</FileVersion>
