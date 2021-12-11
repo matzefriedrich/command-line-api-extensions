@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <PackageVersion>2.0.0-beta1.21216.1</PackageVersion>
+        <PackageVersion>2.0.0-beta1.21308.1</PackageVersion>
         <Authors>Matthias Friedrich</Authors>
         <Description>A slim command configuration and execution layer similar to Microsoft.Extensions.CommandlineUtils.</Description>
         <Copyright>2020 - 2021 by Matthias Friedrich</Copyright>
