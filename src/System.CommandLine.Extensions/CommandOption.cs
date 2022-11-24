@@ -14,9 +14,9 @@ namespace System.CommandLine.Extensions
             this.option = option ?? throw new ArgumentNullException(nameof(option));
         }
 
-        public CommandOption Suggest(params string[] suggestions)
+        public CommandOption Suggest(params string[] completions)
         {
-            this.option.AddSuggestions(suggestions);
+            this.option.AddCompletions(completions);
 
             return this;
         }

@@ -5,11 +5,13 @@
         <PackageVersion>2.0.0-beta1.21216.1</PackageVersion>
         <Authors>Matthias Friedrich</Authors>
         <Description>A slim command configuration and execution layer similar to Microsoft.Extensions.CommandlineUtils.</Description>
-        <Copyright>2020 - 2021 by Matthias Friedrich</Copyright>
+        <Copyright>2020 - 2022 by Matthias Friedrich</Copyright>
         <RepositoryUrl>https://github.com/matzefriedrich/command-line-api-extensions</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>CLI</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <LangVersion>default</LangVersion>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -19,19 +21,22 @@
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
       <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-      <WarningsAsErrors></WarningsAsErrors>
       <NoWarn>1701;1702;1591</NoWarn>
+      <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
       <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-      <WarningsAsErrors></WarningsAsErrors>
       <NoWarn>1701;1702;1591</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.21308.1" />
+      <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\System.CommandLine.Extensions.SourceGenerators\System.CommandLine.Extensions.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 
 </Project>

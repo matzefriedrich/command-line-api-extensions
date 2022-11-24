@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.CommandLine.Extensio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "demo", "demo\demo.csproj", "{10B75815-6932-45EB-A01A-C431334CD183}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.CommandLine.Extensions.SourceGenerators", "System.CommandLine.Extensions.SourceGenerators\System.CommandLine.Extensions.SourceGenerators.csproj", "{199445B1-B88B-41F5-8943-DDC78199FBE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{10B75815-6932-45EB-A01A-C431334CD183}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10B75815-6932-45EB-A01A-C431334CD183}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10B75815-6932-45EB-A01A-C431334CD183}.Release|Any CPU.Build.0 = Release|Any CPU
+		{199445B1-B88B-41F5-8943-DDC78199FBE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{199445B1-B88B-41F5-8943-DDC78199FBE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{199445B1-B88B-41F5-8943-DDC78199FBE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{199445B1-B88B-41F5-8943-DDC78199FBE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
