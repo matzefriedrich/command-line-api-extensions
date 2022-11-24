@@ -1,14 +1,16 @@
 ﻿namespace System.CommandLine.Extensions
 {
+    using Binding;
+    using Collections.Generic;
     using Diagnostics.CodeAnalysis;
-    using Invocation;
     using IO;
+    using Linq;
     using Parsing;
     using Threading.Tasks;
-
+    
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [SuppressMessage("ReSharper", "UnusedMethodReturnValue.Global")]
-    public class CommandLineApplication
+    public partial class CommandLineApplication
     {
         private readonly Command command;
 
@@ -18,7 +20,7 @@
 
         private CommandLineApplication(Command command) => this.command = command ?? throw new ArgumentNullException(nameof(command));
 
-        public CommandLineApplication Command(string name, string description = null, Action<CommandLineApplication> factory = null)
+        public CommandLineApplication Command(string name, string? description = null, Action<CommandLineApplication>? factory = null)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
@@ -30,35 +32,37 @@
             return this;
         }
 
-        public CommandOption Option<T>(string template, string description = null, IArgumentArity argumentArity = null)
+        public CommandOption Option<T>(string template, string? description = null, ArgumentArity argumentArity = default)
         {
             if (string.IsNullOrWhiteSpace(template))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(template));
 
             string[] aliases = template.Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries);
             Type argumentType = typeof(T);
-            var option = new Option(aliases, description, argumentType, arity: argumentArity)
+            var option = new Option<T>(aliases, description)
             {
+                Arity = argumentArity,
                 IsRequired = Nullable.GetUnderlyingType(argumentType) == null
             };
-
+            
             this.command.AddOption(option);
             return new CommandOption(this, option);
         }
+        
+        public void OnExecute(Func<Task<int>> execute) => this.command.SetHandler(execute);
 
-        public void OnExecute(Func<Task<int>> execute) => this.command.Handler = CommandHandler.Create(execute);
-        public void OnExecute<T1>(Func<T1, Task<int>> execute) => this.command.Handler = CommandHandler.Create(execute);
-        public void OnExecute<T1, T2>(Func<T1, T2, Task<int>> execute) => this.command.Handler = CommandHandler.Create(execute);
-        public void OnExecute<T1, T2, T3>(Func<T1, T2, T3, Task<int>> execute) => this.command.Handler = CommandHandler.Create(execute);
-        public void OnExecute<T1, T2, T3, T4>(Func<T1, T2, T3, T4, Task<int>> execute) => this.command.Handler = CommandHandler.Create(execute);
-        public void OnExecute<T1, T2, T3, T4, T5>(Func<T1, T2, T3, T4, T5, Task<int>> execute) => this.command.Handler = CommandHandler.Create(execute);
-        public void OnExecute<T1, T2, T3, T4, T5, T6>(Func<T1, T2, T3, T4, T5, T6, Task<int>> execute) => this.command.Handler = CommandHandler.Create(execute);
-        public void OnExecute<T1, T2, T3, T4, T5, T6, T7>(Func<T1, T2, T3, T4, T5, T6, T7, Task<int>> execute) => this.command.Handler = CommandHandler.Create(execute);
-        public void OnExecute<T1, T2, T3, T4, T5, T6, T7, T8>(Func<T1, T2, T3, T4, T5, T6, T7, T8, Task<int>> execute) => this.command.Handler = CommandHandler.Create(execute);
-        public void OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task<int>> execute) => this.command.Handler = CommandHandler.Create(execute);
-        public void OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task<int>> execute) => this.command.Handler = CommandHandler.Create(execute);
+        private IValueDescriptor<T> FindValueDescriptorForOption<T>(int index)
+        {
+            IReadOnlyList<Option> options = this.command.Options.ToList();
+            if (index >= 0 && index < options.Count)
+            {
+                return (Option<T>) options[index];
+            }
 
-        public CommandLineApplication Argument<T>(string name, string description = null)
+            return new Option<T>($"missing{index}");
+        }
+        
+        public CommandLineApplication Argument<T>(string name, string? description = null)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
             var argument = new Argument<T>(name) {Description = description};
@@ -82,10 +86,7 @@
             var app = new CommandLineApplication();
             configuration.Configure(app);
 
-            var commandLineConfiguration = new CommandLineConfiguration(new[]
-            {
-                app.command
-            });
+            var commandLineConfiguration = new CommandLineConfiguration(app.command);
 
             var p = new Parser(commandLineConfiguration);
             return await p.InvokeAsync(command, new SystemConsole());
