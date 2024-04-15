@@ -5,7 +5,7 @@ A slim command configuration and execution layer similar to `Microsoft.Extension
 ````csharp
 private static int Main(string[] args)
 {
-    var app = new CommandlineApplication();
+    var app = new CommandLineApplication();
 
     app.Command("greeting", "Greets the specified person.", greeting =>
     {
