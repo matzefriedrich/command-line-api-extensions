@@ -1,4 +1,4 @@
-![.NET 8](https://github.com/matzefriedrich/command-line-api-extensions/workflows/dotnet.yml/badge.svg)
+![.NET 8](https://github.com/matzefriedrich/command-line-api-extensions/actions/workflows/dotnet.yml/badge.svg)
 
 # System.CommandLine.Extensions
 
