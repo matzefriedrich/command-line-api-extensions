@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <PackageVersion>2.1.0-beta4.22272.1</PackageVersion>
+        <PackageVersion>2.1.1-beta4.22272.1</PackageVersion>
         <Authors>Matthias Friedrich</Authors>
         <Description>A slim command configuration and execution layer similar to Microsoft.Extensions.CommandlineUtils.</Description>
         <Copyright>2020 - 2024 by Matthias Friedrich</Copyright>
@@ -11,8 +11,8 @@
         <LangVersion>default</LangVersion>
         <Nullable>enable</Nullable>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <AssemblyVersion>2.1.0.0</AssemblyVersion>
-        <FileVersion>2.1.0.0</FileVersion>
+        <AssemblyVersion>2.1.1.0</AssemblyVersion>
+        <FileVersion>2.1.1.0</FileVersion>
         <TargetFrameworks>net8.0</TargetFrameworks>
     </PropertyGroup>
 
