@@ -2,14 +2,17 @@ name: .NET
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
+      - develop
   pull_request:
     branches: [ "master" ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./src
 
     steps:
     - uses: actions/checkout@v4
@@ -20,7 +23,13 @@ jobs:
         dotnet-version: 8.0.x
     
     - name: Restore dependencies
-      run: dotnet restore src/System.CommandLine.Extensions.sln
+      working-directory: ${{env.working-directory}}
+      run: dotnet restore System.CommandLine.Extensions.sln
 
     - name: Build
-      run: dotnet build src/System.CommandLine.Extensions.sln --no-restore
+      working-directory: ${{env.working-directory}}
+      run: dotnet build System.CommandLine.Extensions.sln --no-restore
+
+    - name: Test
+      working-directory: ${{env.working-directory}}
+      run: dotnet test System.CommandLine.Extensions.sln --no-restore --verbosity normal
