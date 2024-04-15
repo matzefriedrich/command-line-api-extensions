@@ -6,12 +6,11 @@ namespace System.CommandLine.Extensions
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static partial class CommandOptionExtensions
     {
-        public static CommandOption Option<T>(this CommandOption commandOption, string template, string? description = null)
+        public static CommandOption Option<T>(this CommandOption commandOption, string template, string? description = null, ArgumentArity argumentArity = default)
         {
             if (commandOption == null) throw new ArgumentNullException(nameof(commandOption));
 
-
-            return commandOption.Command.Option<T>(template, description);
+            return commandOption.Command.Option<T>(template, description, argumentArity);
         }
 
         public static void OnExecute(this CommandOption commandOption, Func<Task<int>> execute) => commandOption.Command.OnExecute(execute);
