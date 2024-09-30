@@ -1,4 +1,6 @@
 ![.NET 8](https://github.com/matzefriedrich/command-line-api-extensions/actions/workflows/dotnet.yml/badge.svg)
+![GitHub License](https://img.shields.io/github/license/matzefriedrich/command-line-api-extensions)
+![GitHub Release](https://img.shields.io/github/v/release/matzefriedrich/command-line-api-extensions?include_prereleases&display_name=tag)
 
 # System.CommandLine.Extensions
 
