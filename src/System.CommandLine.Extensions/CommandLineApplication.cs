@@ -81,7 +81,7 @@
 
         public static async Task<int> ConfigureAndExecuteAsync(ICommandsConfiguration configuration, string command)
         {
-            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+            ArgumentNullException.ThrowIfNull(configuration);
 
             var app = new CommandLineApplication();
             configuration.Configure(app);

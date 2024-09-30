@@ -8,7 +8,7 @@ namespace System.CommandLine.Extensions
     {
         public static CommandOption Option<T>(this CommandOption commandOption, string template, string? description = null, ArgumentArity argumentArity = default)
         {
-            if (commandOption == null) throw new ArgumentNullException(nameof(commandOption));
+            ArgumentNullException.ThrowIfNull(commandOption);
 
             return commandOption.Command.Option<T>(template, description, argumentArity);
         }
