@@ -32,17 +32,18 @@
             return this;
         }
 
-        public CommandOption Option<T>(string template, string? description = null, ArgumentArity argumentArity = default)
+        public CommandOption Option<T>(string template, string? description = null, ArgumentArity argumentArity = default, bool? required = null)
         {
             if (string.IsNullOrWhiteSpace(template))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(template));
 
-            string[] aliases = template.Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries);
+            string[] aliases = template.Split(['|'], StringSplitOptions.RemoveEmptyEntries);
             Type argumentType = typeof(T);
+            bool isRequired = /* required ??*/ Nullable.GetUnderlyingType(argumentType) == null;
             var option = new Option<T>(aliases, description)
             {
                 Arity = argumentArity,
-                IsRequired = Nullable.GetUnderlyingType(argumentType) == null
+                IsRequired = isRequired
             };
             
             this.command.AddOption(option);

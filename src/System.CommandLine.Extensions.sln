@@ -1,10 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.CommandLine.Extensions", "System.CommandLine.Extensions\System.CommandLine.Extensions.csproj", "{C25BB2E3-F989-4BA6-9009-406832DA1375}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "demo", "demo\demo.csproj", "{10B75815-6932-45EB-A01A-C431334CD183}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.CommandLine.Extensions.SourceGenerators", "System.CommandLine.Extensions.SourceGenerators\System.CommandLine.Extensions.SourceGenerators.csproj", "{199445B1-B88B-41F5-8943-DDC78199FBE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.CommandLine.Extensions.Tests", "System.CommandLine.Extensions.Tests\System.CommandLine.Extensions.Tests.csproj", "{F27928CE-967F-412C-9E37-0549A36095C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +27,9 @@ Global
 		{199445B1-B88B-41F5-8943-DDC78199FBE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{199445B1-B88B-41F5-8943-DDC78199FBE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{199445B1-B88B-41F5-8943-DDC78199FBE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F27928CE-967F-412C-9E37-0549A36095C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F27928CE-967F-412C-9E37-0549A36095C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F27928CE-967F-412C-9E37-0549A36095C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F27928CE-967F-412C-9E37-0549A36095C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
