@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <PackageVersion>v2.2.1-beta4.22272.2</PackageVersion>
+        <PackageVersion>2.2.1-beta4.22272.2</PackageVersion>
         <Authors>Matthias Friedrich</Authors>
         <Description>A slim command configuration and execution layer similar to Microsoft.Extensions.CommandlineUtils.</Description>
         <Copyright>2020 - 2026 by Matthias Friedrich</Copyright>
