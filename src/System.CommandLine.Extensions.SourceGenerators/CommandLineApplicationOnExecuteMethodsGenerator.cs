@@ -5,10 +5,10 @@
     using Text;
 
     [Generator]
-    public sealed class CommandLineApplicationOnExecuteMethodsGenerator : ISourceGenerator
+    public sealed class CommandLineApplicationOnExecuteMethodsGenerator : IIncrementalGenerator
     {
         private const int NumOverloads = 8;
-        
+
         private const string NamespaceName = "System.CommandLine.Extensions";
         private const string TypeName = "CommandLineApplication";
 
@@ -20,30 +20,31 @@
             "System.Threading.Tasks"
         };
 
-
-        public void Initialize(GeneratorInitializationContext context)
+        public void Initialize(IncrementalGeneratorInitializationContext context)
         {
+            context.RegisterPostInitializationOutput(static ctx =>
+            {
+                var sourceText = GenerateSource();
+                ctx.AddSource(nameof(CommandLineApplicationOnExecuteMethodsGenerator), sourceText);
+            });
         }
 
-        public void Execute(GeneratorExecutionContext context)
+        private static SourceText GenerateSource()
         {
             var builder = new StringBuilder();
 
             builder.AppendLine($"namespace {NamespaceName}");
             builder.AppendBlock(ns =>
             {
-                foreach (string importedNamespace in UsingList.OrderBy(s => s))
-                {
-                    ns.AppendLine($"using {importedNamespace};");
-                }
+                foreach (var importedNamespace in UsingList.OrderBy(s => s)) ns.AppendLine($"using {importedNamespace};");
 
                 ns.AppendLine($"partial class {TypeName}");
                 ns.AppendBlock(t =>
                 {
                     for (var i = 1; i <= NumOverloads; i++)
                     {
-                        int methodArgumentsCount = i;
-                        string typeArgumentsString = string.Join(", ", Enumerable.Range(1, methodArgumentsCount).Select(typeParameterIndex => $"T{typeParameterIndex}"));
+                        var methodArgumentsCount = i;
+                        var typeArgumentsString = string.Join(", ", Enumerable.Range(1, methodArgumentsCount).Select(typeParameterIndex => $"T{typeParameterIndex}"));
 
                         t.AppendLine($"public void OnExecute<{typeArgumentsString}>(Func<{typeArgumentsString}, Task<int>> execute)");
                         t.AppendBlock(methodBody =>
@@ -53,33 +54,32 @@
                             var parameters = new List<string>();
                             for (var j = 0; j < methodArgumentsCount; j++)
                             {
-                                int parameterIndex = j + 1;
+                                var parameterIndex = j + 1;
                                 var variableName = $"descriptor{parameterIndex}";
                                 methodBody.AppendLine($"IValueDescriptor<T{parameterIndex}> {variableName} = this.FindValueDescriptorForOption<T{parameterIndex}>({j});");
                                 parameters.Add(variableName);
                             }
 
-                            string parametersString = string.Join(", ", parameters);
+                            var parametersString = string.Join(", ", parameters);
                             methodBody.AppendLine($"this.command.SetHandler(execute, {parametersString});");
                         });
                     }
                 });
-                
+
                 ns.AppendLine("partial class CommandOptionExtensions");
                 ns.AppendBlock(t =>
                 {
                     for (var i = 1; i <= NumOverloads; i++)
                     {
-                        int methodArgumentsCount = i;
-                        string typeArgumentsString = string.Join(", ", Enumerable.Range(1, methodArgumentsCount).Select(typeParameterIndex => $"T{typeParameterIndex}"));
+                        var methodArgumentsCount = i;
+                        var typeArgumentsString = string.Join(", ", Enumerable.Range(1, methodArgumentsCount).Select(typeParameterIndex => $"T{typeParameterIndex}"));
 
                         t.AppendLine($"public static void OnExecute<{typeArgumentsString}>(this CommandOption commandOption, Func<{typeArgumentsString}, Task<int>> execute) => commandOption.Command.OnExecute(execute);");
                     }
                 });
             });
 
-            SourceText sourceText = SourceText.From(builder.ToString(), Encoding.UTF8);
-            context.AddSource(nameof(CommandLineApplicationOnExecuteMethodsGenerator), sourceText);
+            return SourceText.From(builder.ToString(), Encoding.UTF8);
         }
     }
 
@@ -94,36 +94,27 @@
         }
     }
 
-    internal sealed class IndentedStringWriter
+    internal sealed class IndentedStringWriter(StringBuilder stringBuilder, int indentionLevel)
     {
-        private readonly int indentionLevel;
-        private readonly string indentionString;
-        private readonly StringBuilder stringBuilder;
-
-        public IndentedStringWriter(StringBuilder stringBuilder, int indentionLevel)
-        {
-            this.stringBuilder = stringBuilder;
-            this.indentionLevel = indentionLevel;
-            this.indentionString = new string(' ', indentionLevel * 4);
-        }
+        private readonly string indentionString = new(' ', indentionLevel * 4);
 
         public void AppendBlock(Action<IndentedStringWriter> blockWriter)
         {
-            this.stringBuilder.Append(this.indentionString);
-            this.stringBuilder.AppendLine("{");
+            stringBuilder.Append(this.indentionString);
+            stringBuilder.AppendLine("{");
 
-            var writer = new IndentedStringWriter(this.stringBuilder, this.indentionLevel + 1);
+            var writer = new IndentedStringWriter(stringBuilder, indentionLevel + 1);
             blockWriter(writer);
 
-            this.stringBuilder.Append(this.indentionString);
-            this.stringBuilder.AppendLine("}");
-            this.stringBuilder.AppendLine();
+            stringBuilder.Append(this.indentionString);
+            stringBuilder.AppendLine("}");
+            stringBuilder.AppendLine();
         }
 
         public void AppendLine(string text)
         {
-            this.stringBuilder.Append(this.indentionString);
-            this.stringBuilder.AppendLine(text);
+            stringBuilder.Append(this.indentionString);
+            stringBuilder.AppendLine(text);
         }
     }
 }
