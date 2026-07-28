@@ -62,7 +62,7 @@ public partial class CommandLineApplication
 
     private Option<T> FindValueDescriptorForOption<T>(int index)
     {
-        IReadOnlyList<Option> options = this.command.Options.ToList();
+        var options = this.command.Options.Where(o => o.GetType().Name != "HelpOption" && o.GetType().Name != "VersionOption").ToList();
         if (index >= 0 && index < options.Count)
         {
             return (Option<T>)options[index];
