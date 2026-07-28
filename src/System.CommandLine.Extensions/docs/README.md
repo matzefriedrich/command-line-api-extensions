@@ -1,4 +1,5 @@
-A slim command configuration and execution layer similar to `Microsoft.Extensions.CommandlineUtils`, but built on top of the new `System.Commandline` API.
+A slim command configuration and execution layer similar to `Microsoft.Extensions.CommandlineUtils`, but built on top of
+the new `System.Commandline` API.
 
 ## Usage
 

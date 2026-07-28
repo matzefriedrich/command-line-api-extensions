@@ -3,7 +3,6 @@
 using Collections.Generic;
 using Diagnostics.CodeAnalysis;
 using Linq;
-using Parsing;
 using Threading.Tasks;
 
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
@@ -58,10 +57,7 @@ public partial class CommandLineApplication
 
     public void OnExecute(Func<Task<int>> execute)
     {
-        this.command.SetAction(async (result, token) =>
-        {
-            return await execute();
-        });
+        this.command.SetAction(async (result, token) => await execute());
     }
 
     private Option<T> FindValueDescriptorForOption<T>(int index)
