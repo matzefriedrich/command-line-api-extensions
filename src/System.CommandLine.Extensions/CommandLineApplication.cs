@@ -37,7 +37,7 @@
             if (string.IsNullOrWhiteSpace(template))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(template));
 
-            string[] aliases = template.Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries);
+            string[] aliases = template.Split(['|'], StringSplitOptions.RemoveEmptyEntries);
             Type argumentType = typeof(T);
             var option = new Option<T>(aliases, description)
             {
