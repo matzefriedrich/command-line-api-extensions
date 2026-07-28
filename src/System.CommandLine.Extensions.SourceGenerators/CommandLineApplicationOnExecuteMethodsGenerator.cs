@@ -15,7 +15,6 @@
         private static readonly IEnumerable<string> UsingList = new List<string>
         {
             "Collections.Generic",
-            "System.CommandLine.Binding",
             "System.Linq",
             "System.Threading.Tasks"
         };
@@ -49,19 +48,27 @@
                         t.AppendLine($"public void OnExecute<{typeArgumentsString}>(Func<{typeArgumentsString}, Task<int>> execute)");
                         t.AppendBlock(methodBody =>
                         {
-                            methodBody.AppendLine("IReadOnlyList<Option> options = this.command.Options.ToList();");
-
-                            var parameters = new List<string>();
                             for (var j = 0; j < methodArgumentsCount; j++)
                             {
                                 var parameterIndex = j + 1;
-                                var variableName = $"descriptor{parameterIndex}";
-                                methodBody.AppendLine($"IValueDescriptor<T{parameterIndex}> {variableName} = this.FindValueDescriptorForOption<T{parameterIndex}>({j});");
-                                parameters.Add(variableName);
+                                methodBody.AppendLine($"var option{parameterIndex} = this.FindValueDescriptorForOption<T{parameterIndex}>({j});");
                             }
 
-                            var parametersString = string.Join(", ", parameters);
-                            methodBody.AppendLine($"this.command.SetHandler(execute, {parametersString});");
+                            methodBody.AppendLine("this.command.SetAction(async (parseResult, token) =>");
+                            methodBody.AppendBlock(actionBody =>
+                            {
+                                var values = new List<string>();
+                                for (var j = 0; j < methodArgumentsCount; j++)
+                                {
+                                    var parameterIndex = j + 1;
+                                    actionBody.AppendLine($"var value{parameterIndex} = parseResult.GetValue(option{parameterIndex});");
+                                    values.Add($"value{parameterIndex}!");
+                                }
+
+                                var parametersString = string.Join(", ", values);
+                                actionBody.AppendLine($"return await execute({parametersString});");
+                            });
+                            methodBody.AppendLine(");");
                         });
                     }
                 });
