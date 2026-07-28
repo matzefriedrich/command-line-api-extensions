@@ -17,35 +17,36 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <DocumentationFile>bin\Release\System.CommandLine.Extensions.xml</DocumentationFile>
+        <DocumentationFile>bin\Release\System.CommandLine.Extensions.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-      <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-      <NoWarn>1701;1702;1591</NoWarn>
-      <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+        <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <NoWarn>1701;1702;1591</NoWarn>
+        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-      <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-      <NoWarn>1701;1702;1591</NoWarn>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+        <NoWarn>1701;1702;1591</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+        <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="5.6.0"/>
+        <PackageReference Include="System.CommandLine" Version="2.0.10"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\System.CommandLine.Extensions.SourceGenerators\System.CommandLine.Extensions.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+        <ProjectReference Include="..\System.CommandLine.Extensions.SourceGenerators\System.CommandLine.Extensions.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Include="docs/README.md">
-        <Pack>True</Pack>
-        <PackagePath>/</PackagePath>
-      </None>
+        <None Include="docs/README.md">
+            <Pack>True</Pack>
+            <PackagePath>/</PackagePath>
+        </None>
     </ItemGroup>
 
 </Project>

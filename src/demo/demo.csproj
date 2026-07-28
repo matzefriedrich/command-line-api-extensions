@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\System.CommandLine.Extensions\System.CommandLine.Extensions.csproj" />
+        <ProjectReference Include="..\System.CommandLine.Extensions\System.CommandLine.Extensions.csproj"/>
     </ItemGroup>
 
 </Project>

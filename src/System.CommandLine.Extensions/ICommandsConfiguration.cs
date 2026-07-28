@@ -1,7 +1,6 @@
-namespace System.CommandLine.Extensions
+namespace System.CommandLine.Extensions;
+
+public interface ICommandsConfiguration
 {
-    public interface ICommandsConfiguration
-    {
-        void Configure(CommandLineApplication app);
-    }
+    void Configure(CommandLineApplication app);
 }
